@@ -25,7 +25,7 @@ def traditional_selection_sort(arr):
             output[i], output[min_index] = output[min_index], output[i]
         print(f"Pass {passes}: {output}")
 
-    print(f"Total passes (Normal Selection Sort): {passes}\n")
+    print(f"Total passes: {passes}\n")
     return output, passes
 
 
@@ -70,7 +70,7 @@ def optimized_selection_sort(arr): # Optimized Selection Sort/2Min Selection Sor
         print(f"Pass {passes}: {output}")
         i += 2
 
-    print(f"Total passes (Optimized Selection Sort): {passes}\n")
+    print(f"Total passes: {passes}\n")
     return output, passes
 
 
@@ -85,5 +85,6 @@ optimized_sorted, optimized_passes = optimized_selection_sort(arr)
 print("\nComparison Summary:")
 print("Traditional Selection Sort Passes:", traditional_passes)
 print("Optimized Selection Sort Passes:", optimized_passes)
-print("\nFinal Sorted Array (Original Selection Sort):", traditional_sorted)
+print("\nFinal Sorted Array (Traditional Selection Sort):", traditional_sorted)
 print("Final Sorted Array (Optimized Selection Sort):", optimized_sorted)
+
