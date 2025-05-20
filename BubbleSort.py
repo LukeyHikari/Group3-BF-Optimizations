@@ -1,0 +1,80 @@
+def bubble_sort(arr):
+    n = len(arr)
+    passes = 0
+    #Copy of original list to not modify original
+    arr = arr[:]
+    print("\n=== Normal Bubble Sort ===")
+
+    #For each outer pass, move the largest unsorted element to its proper position.
+    for i in range(n):
+        passes += 1
+        print(f"Pass {passes}: {arr}")
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+    return arr, passes
+
+
+def alternate_sort(arr):
+    n = len(arr)
+    if n < 2:
+        print("There is nothing to sort, Array is too short", arr)
+        return arr, 0
+
+    pass_count = 0  #It tracks the number of passes
+    swapped = True  #Indicates if swap was made in a cycle
+
+    print("\n=== Optimized Bubble Sort ===")
+    print("Initial list:", arr)
+
+    #Continue processing until no swaps have occurred in a complete cycle
+    while swapped:
+        pass_count += 1
+        print(f"\n=== Optimized Pass Cycle #{pass_count} ===")
+        swapped = False
+
+        #Compares element in the even indices 2 indices away from current index
+        #then swap if current element is larger than compared element
+        for i in range(0, n - 2, 2):
+            if arr[i] > arr[i + 2]:
+                arr[i], arr[i + 2] = arr[i + 2], arr[i]
+                swapped = True
+        print("After even-index sorting:", arr)
+
+        #Compares element in the odd indices 2 indices away from current index
+        #then swap if current element is larger than compared element
+        for i in range(1, n - 2, 2):
+            if arr[i] > arr[i + 2]:
+                arr[i], arr[i + 2] = arr[i + 2], arr[i]
+                swapped = True
+        print("After odd-index sorting:", arr)
+
+        #Normal bubble sort if there are still unsorted elements:
+        for i in range(n - 1):
+            if arr[i] > arr[i + 1]:
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                swapped = True
+        print("After normal bubble sorting:", arr)
+
+    print("\nFinal sorted list using optimized bubble sort:", arr)
+    return arr, pass_count
+
+#input a list of numbers
+user_input = input("Enter the list of numbers, separated by commas: ")
+try:
+    #split user input with commas and remove whitespace.
+    inputUser = [int(x.strip()) for x in user_input.split(',')]
+except ValueError:
+    print("Invalid input. Please enter valid integers separated by commas.")
+    exit(1)
+
+#run the normal bubble sort.
+sorted_normal, normal_passes = bubble_sort(inputUser)
+print("\nFinal sorted list using bubble sort:", sorted_normal)
+print("Total passes:", normal_passes)
+
+#run the alternate sort
+inputUser_optimized = inputUser[:]
+sorted_optimized, optimized_passes = alternate_sort(inputUser_optimized)
+print("Total pass cycles:", optimized_passes)
